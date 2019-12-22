@@ -18,7 +18,7 @@ export default {
   },
   async asyncData({ $axios }) {
     return {
-      tweets: await $axios.$get('/api/')
+      tweets: await $axios.$get('/api/home')
     }
   }
 }

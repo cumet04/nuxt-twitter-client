@@ -5,7 +5,7 @@ const app = express()
 
 // ----------
 
-app.get('/', function(req, res) {
+app.get('/home', function(req, res) {
   const client = Twitter({
     consumer_key: process.env.TWITTER_CONSUMER_KEY,
     consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
@@ -21,5 +21,5 @@ app.get('/', function(req, res) {
 
 module.exports = {
   path: '/api',
-  handler: app
+  handler: process.env.DEV_USE_API_MOCK ? express.static('api/mock') : app
 }
