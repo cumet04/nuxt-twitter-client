@@ -4,11 +4,19 @@
   "description": "My swell Nuxt.js project",
   "author": "cumet04",
   "private": true,
+  "engines": {
+    "node": "12.14.0",
+    "npm": "6.13.4"
+  },
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
   },
   "dependencies": {
     "nuxt": "^2.0.0",
