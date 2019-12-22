@@ -17,6 +17,7 @@ export default {
   css: [],
   plugins: [],
   buildModules: [],
+  serverMiddleware: [{ path: '/api', handler: '~/api/index.js' }],
   modules: ['@nuxtjs/axios'],
   axios: {},
   build: {
