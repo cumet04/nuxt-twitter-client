@@ -1,0 +1,9 @@
+#!/bin/sh
+
+IMAGE_NAME=firebase
+
+docker run -it \
+  -v $PWD/.firebase_config:/root/.config \
+  -v $PWD:/app \
+  -w /app \
+  $IMAGE_NAME bash
