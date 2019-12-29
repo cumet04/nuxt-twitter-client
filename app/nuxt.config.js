@@ -15,7 +15,10 @@ export default {
   },
   loading: { color: '#fff' },
   css: [],
-  plugins: [],
+  env: {
+    firebase_functions_emulator: process.env.DEV_FUNCTIONS_EMULATOR
+  },
+  plugins: ['~/plugins/firebase_init.js'],
   buildModules: [],
   serverMiddleware: [{ path: '/api', handler: '~/middleware/api_proxy.js' }],
   modules: ['@nuxtjs/axios'],

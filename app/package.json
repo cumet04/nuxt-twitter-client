@@ -11,8 +11,7 @@
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate"
+    "start": "nuxt start"
   },
   "prettier": {
     "semi": false,
@@ -20,6 +19,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
+    "firebase": "^7.6.1",
     "nuxt": "^2.0.0"
   },
   "devDependencies": {
