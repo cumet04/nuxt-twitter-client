@@ -5,5 +5,6 @@ IMAGE_NAME=firebase
 docker run -it \
   -v $PWD/.firebase_config:/root/.config \
   -v $PWD:/app \
+  -p 5000:5000 \
   -w /app \
   $IMAGE_NAME bash
