@@ -1,5 +1,5 @@
 export default {
-  mode: 'universal',
+  mode: 'spa',
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -19,7 +19,9 @@ export default {
   buildModules: [],
   serverMiddleware: [{ path: '/api', handler: '~/middleware/api_proxy.js' }],
   modules: ['@nuxtjs/axios'],
-  axios: {},
+  axios: {
+    baseURL: '/'
+  },
   build: {
     extend(config, ctx) {}
   }
