@@ -20,12 +20,12 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
-    "nuxt": "^2.0.0",
-    "twitter": "^1.7.1"
+    "nuxt": "^2.0.0"
   },
   "devDependencies": {
     "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-prettier": "^3.0.1",
+    "http-proxy": "^1.18.0",
     "prettier": "^1.16.4"
   }
 }
