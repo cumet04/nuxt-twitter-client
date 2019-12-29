@@ -16,7 +16,9 @@ export default {
   loading: { color: '#fff' },
   css: [],
   env: {
-    firebase_functions_emulator: process.env.DEV_FUNCTIONS_EMULATOR
+    dev_functions_emulator: process.env.DEV_FUNCTIONS_EMULATOR,
+    dev_twitter_access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+    dev_twitter_access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
   },
   plugins: ['~/plugins/firebase_init.js'],
   buildModules: [],

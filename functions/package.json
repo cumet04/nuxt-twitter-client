@@ -2,7 +2,7 @@
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "scripts": {
-    "serve": "nodemon local_entry.js",
+    "serve": "firebase serve -o 0.0.0.0 --only functions",
     "shell": "firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
@@ -11,7 +11,7 @@
   "engines": {
     "node": "8"
   },
-  "main": "firebase_entry.js",
+  "main": "entry.js",
   "dependencies": {
     "express": "^4.17.1",
     "firebase-admin": "^8.6.0",

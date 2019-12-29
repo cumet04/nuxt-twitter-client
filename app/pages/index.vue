@@ -20,12 +20,17 @@ export default {
     tweet: Tweet
   },
   async asyncData({ store }) {
-    const data = await firebase
+    const resp = await firebase
       .app()
       .functions()
-      .httpsCallable('home')()
+      .httpsCallable('home')({
+      twitter: {
+        access_token_key: process.env.dev_twitter_access_token_key,
+        access_token_secret: process.env.dev_twitter_access_token_secret
+      }
+    })
     return {
-      tweets: data
+      tweets: resp.data
     }
   }
 }
