@@ -1,5 +1,5 @@
 export default {
-  mode: 'universal',
+  mode: 'spa',
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -15,11 +15,18 @@ export default {
   },
   loading: { color: '#fff' },
   css: [],
-  plugins: [],
+  env: {
+    dev_functions_emulator: process.env.DEV_FUNCTIONS_EMULATOR,
+    dev_twitter_access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+    dev_twitter_access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+  },
+  plugins: ['~/plugins/firebase_init.js'],
   buildModules: [],
   serverMiddleware: [{ path: '/api', handler: '~/middleware/api_proxy.js' }],
   modules: ['@nuxtjs/axios'],
-  axios: {},
+  axios: {
+    baseURL: '/'
+  },
   build: {
     extend(config, ctx) {}
   }

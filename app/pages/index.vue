@@ -12,13 +12,25 @@
 import axios from 'axios'
 import Tweet from '~/components/Tweet.vue'
 
+import firebase from 'firebase/app'
+import 'firebase/functions'
+
 export default {
   components: {
     tweet: Tweet
   },
-  async asyncData({ $axios }) {
+  async asyncData({ store }) {
+    const resp = await firebase
+      .app()
+      .functions()
+      .httpsCallable('home')({
+      twitter: {
+        access_token_key: process.env.dev_twitter_access_token_key,
+        access_token_secret: process.env.dev_twitter_access_token_secret
+      }
+    })
     return {
-      tweets: await $axios.$get('/api/home')
+      tweets: resp.data
     }
   }
 }
