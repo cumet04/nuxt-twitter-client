@@ -14,7 +14,7 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
   loading: { color: '#fff' },
-  css: [],
+  css: ['firebaseui/dist/firebaseui.css'],
   env: {
     dev_functions_emulator: process.env.DEV_FUNCTIONS_EMULATOR,
     dev_twitter_access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
