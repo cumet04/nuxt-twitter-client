@@ -20,7 +20,11 @@ export default {
   components: {
     tweet: Tweet
   },
-  props: ['tweets'],
+  data() {
+    return {
+      tweets: []
+    }
+  },
   mounted() {
     // FIXME: wait for tokens set
     setTimeout(this.fetch_timeline, 1000)
@@ -32,7 +36,6 @@ export default {
         ? firebase.app().functions()
         : firebase.app().functions('asia-northeast1')
 
-      // TODO: [Vue warn]: Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "tweets"
       func
         .httpsCallable('home')({
           twitter: {
