@@ -22,10 +22,13 @@ export default {
   },
   async asyncData({ store }) {
     // FIXME: wait for tokens set
-    const resp = await firebase
-      .app()
-      .functions()
-      .httpsCallable('home')({
+
+    // firebase ignores emulator setting when functions() is called with region
+    const func = process.env.dev_functions_emulator
+      ? firebase.app().functions()
+      : firebase.app().functions('asia-northeast1')
+
+    const resp = await func.httpsCallable('home')({
       twitter: {
         access_token_key: store.state.auth.token,
         access_token_secret: store.state.auth.secret

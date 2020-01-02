@@ -5,4 +5,6 @@ const app = require("./app.js");
 global.app_config =
   functions.config().app_config || require("./.app_config.json");
 
-exports.home = functions.https.onCall(app.home);
+const func_https = functions.region("asia-northeast1").https;
+
+exports.home = func_https.onCall(app.home);
