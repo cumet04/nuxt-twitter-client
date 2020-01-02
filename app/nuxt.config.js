@@ -22,7 +22,7 @@ export default {
   },
   plugins: ['~/plugins/firebase_init.js'],
   buildModules: [],
-  serverMiddleware: [{ path: '/api', handler: '~/middleware/api_proxy.js' }],
+  serverMiddleware: [],
   modules: ['@nuxtjs/axios'],
   axios: {
     baseURL: '/'
