@@ -10,7 +10,13 @@ service cloud.firestore {
         return uid == request.auth.uid;
       }
 
-      allow read, write: if isSignedIn() && isOwner();
+      // filter for private use
+      function isPermitted() {
+        return exists(/databases/$(database)/documents/permitted_users/$(request.auth.uid));
+      }
+
+      allow write: if isSignedIn() && isOwner();
+      allow read: if isSignedIn() && isOwner() && isPermitted();
     }
   }
 }
