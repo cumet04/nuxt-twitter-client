@@ -16,21 +16,36 @@ import firebase from 'firebase/app'
 import 'firebase/functions'
 
 export default {
+  middleware: 'authenticated',
   components: {
     tweet: Tweet
   },
-  async asyncData({ store }) {
-    const resp = await firebase
-      .app()
-      .functions()
-      .httpsCallable('home')({
-      twitter: {
-        access_token_key: process.env.dev_twitter_access_token_key,
-        access_token_secret: process.env.dev_twitter_access_token_secret
-      }
-    })
+  data() {
     return {
-      tweets: resp.data
+      tweets: []
+    }
+  },
+  mounted() {
+    // FIXME: wait for tokens set
+    setTimeout(this.fetch_timeline, 1000)
+  },
+  methods: {
+    fetch_timeline() {
+      // firebase ignores emulator setting when functions() is called with region
+      const func = process.env.dev_functions_emulator
+        ? firebase.app().functions()
+        : firebase.app().functions('asia-northeast1')
+
+      func
+        .httpsCallable('home')({
+          twitter: {
+            access_token_key: this.$store.state.auth.token,
+            access_token_secret: this.$store.state.auth.secret
+          }
+        })
+        .then(resp => {
+          this.tweets = resp.data
+        })
     }
   }
 }
