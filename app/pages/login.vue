@@ -14,13 +14,15 @@ import 'firebase/firestore'
 export default {
   mounted() {
     firebase.auth().onAuthStateChanged(user => {
-      if (user) return
+      if (user) {
+        this.$router.push('/')
+        return
+      }
 
       const ui =
         firebaseui.auth.AuthUI.getInstance() ||
         new firebaseui.auth.AuthUI(firebase.auth())
 
-      // TODO: not popup
       const config = {
         signInOptions: [firebase.auth.TwitterAuthProvider.PROVIDER_ID],
         callbacks: {
@@ -34,13 +36,13 @@ export default {
                 secret: result.credential.secret
               })
               .then(() => {
-                window.location.href = '/'
+                this.$router.push('/')
               })
+            // Disable firebaseui's redirect and use nuxt's it to wait until document set
             return false
           }
         },
-        signInSuccessUrl: '/',
-        signInFlow: 'popup'
+        signInFlow: 'redirect'
       }
 
       ui.start('#firebaseui-auth-container', config)

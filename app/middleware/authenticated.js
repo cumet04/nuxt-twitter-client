@@ -10,23 +10,25 @@ export default function(context) {
     })
     return
   }
+
   firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-      return firebase
-        .firestore()
-        .collection('tokens')
-        .doc(user.uid)
-        .get()
-        .then(doc => {
-          const data = doc.data()
-          context.store.commit('auth/set', {
-            token: data.token,
-            secret: data.secret
-          })
-        })
-      // TODO: error handling (for document not found)
-    } else {
+    if (!user) {
       context.redirect('/login/')
+      return
     }
+
+    // TODO: error handling (for document not found)
+    firebase
+      .firestore()
+      .collection('tokens')
+      .doc(user.uid)
+      .get()
+      .then(doc => {
+        const data = doc.data()
+        context.store.commit('auth/set', {
+          token: data.token,
+          secret: data.secret
+        })
+      })
   })
 }
