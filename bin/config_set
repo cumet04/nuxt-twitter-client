@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -eu
+
+IMAGE_NAME=firebase
+
+params=$(cat ./functions/.app_config.json | grep : | sed 's/[ ",]//g' | sed 's/^/app_config./g' | sed 's/:/=/g')
+docker run -it \
+  -v $PWD/.firebase_config:/root/.config \
+  -v $PWD:/app \
+  -w /app \
+  $IMAGE_NAME firebase functions:config:set $params

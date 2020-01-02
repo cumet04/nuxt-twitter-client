@@ -16,17 +16,19 @@ import firebase from 'firebase/app'
 import 'firebase/functions'
 
 export default {
+  middleware: 'authenticated',
   components: {
     tweet: Tweet
   },
   async asyncData({ store }) {
+    // FIXME: wait for tokens set
     const resp = await firebase
       .app()
       .functions()
       .httpsCallable('home')({
       twitter: {
-        access_token_key: process.env.dev_twitter_access_token_key,
-        access_token_secret: process.env.dev_twitter_access_token_secret
+        access_token_key: store.state.auth.token,
+        access_token_secret: store.state.auth.secret
       }
     })
     return {
