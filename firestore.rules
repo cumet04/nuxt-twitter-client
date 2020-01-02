@@ -1,0 +1,22 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /tokens/{uid} {
+      function isSignedIn() {
+        return request.auth != null;
+      }
+
+      function isOwner() {
+        return uid == request.auth.uid;
+      }
+
+      // filter for private use
+      function isPermitted() {
+        return exists(/databases/$(database)/documents/permitted_users/$(request.auth.uid));
+      }
+
+      allow write: if isSignedIn() && isOwner();
+      allow read: if isSignedIn() && isOwner() && isPermitted();
+    }
+  }
+}
